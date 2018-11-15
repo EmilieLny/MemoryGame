@@ -5,23 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Memory Game</title>
     <meta name="author" content="Emilie">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./CSS/style.css">
+    <title>Memory Game</title>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js""></script>
+    <!-- importing flip js -->
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <!-- my JS file with ready() -->
+    <script src="./JS/main.js"></script>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <!-- my CSS file -->
+    <link rel="stylesheet" href="./CSS/style.css" />
+    
 </head>
 
 <body>
-    <div></div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Memory Game</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lacinia nunc sit amet rhoncus tempor. Nunc
+                dignissim, augue ut condimentum dictum, tellus lorem ornare odio, sed consectetur arcu neque nec
+                ligula. Integer pellentesque posuere leo vitae ultrices. Morbi sit amet sollicitudin felis.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Start a New game</a></p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+            <div class="col-lg-2">
+            </div>
+    
+            <div class="col-lg-8" id='boardGame'>
+            </div>
+            <div class="col-lg-2">
+                </div>
+        </div>
 
 
 
+    
 
 
-     <!-- jQuery first, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js""></script>
-    <script src="./JS/main.js"></script>
+    
+
+    
 </body>
 
 </html>
