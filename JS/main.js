@@ -1,82 +1,83 @@
 $(document).ready(function () {
+
     // All my cards 
-    var unshuffledImg = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4','card5', 'card5', 'card6', 'card6',]
+    var unshuffledImg = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',]
+    
     // Suffled my cards
-    var shuffledImg = unshuffledImg
-        .map((a) => ({ sort: Math.random(), value: a }))
-        .sort((a, b) => a.sort - b.sort)
-        .map((a) => a.value)
+    var shuffledImg = unshuffledImg.sort(function() { return 0.5 - Math.random() });
+    console.log(shuffledImg);
+    
     // Select my Board Game
-    var boardGame = $('#boardGame');
+    var boardGame = document.getElementById('boardGame');
+
     // Creat a new board game with suffled cards (back cards)
     function creatCard(srcArr) {
-        for(var i = 0; i<srcArr.length; i++) {
-            var card = $("<div>");
-            card.addClass('card');
-            card.css('background-image', 'url("./images/cardBack.png")')
-            card.attr('id','card' + (i +1));
+        for (var i = 0; i < srcArr.length; i++) {
+            var card = document.createElement("div");
+            card.setAttribute('class','card');
+            card.style.backgroundImage = 'url("./images/cardBack.png")';
+            card.setAttribute('id', 'card' + (i + 1));
             boardGame.append(card);
-            var cardId = $( '.card#card'+ (i+1) );
-            cardId.on('click',showCard);
-            //console.log(cardId);
-            //cardId.css( "border", "3px solid red" );
-            //cardId.css('background-image', 'url("./images/'+srcArr[i]+'.png")')
+            cardId = boardGame.lastElementChild;
+            console.log(cardId);
+            cardId.addEventListener('click', showCard);
+            cardId.addEventListener('click', checkMatch);
         }
     }
     creatCard(shuffledImg);
+
     // Select all my cards
-       var cards = $('.card');
-       //console.log(cards)
+    var cards = boardGame.children; // obj
+    
     // Show my card selected
     function showCard() {
-        //var e = event;
-        for(var i = 0; i<cards.length; i++) {
-            var cardChoosed = event.target;
-            //console.log(cardChoosed)
+        var cardChoosed = this;
+            console.log('cardChoosed ' + cardChoosed.id)
+        for (var i = 0; i < cards.length; i++) {
             if (cardChoosed == cards[i]) {
-                var cardsVal = shuffledImg[i];
-                var idName = cards[i].id;
-                //console.log('idName : ' +idName)
-                var cardId = $( '.card#'+idName );
-                cardId.css( "border", "3px solid red" );
-                cardId.css('background-image', 'url("./images/'+cardsVal+'.png")')
+                var cardId = $('.card#' + cardChoosed.id);
+                cardId.css("border", "3px solid red");
+                cardId.css('background-image', 'url("./images/' + shuffledImg[i] + '.png")');
             }
-
         }
     }
-    //for(var i = 0; i<unshuffledImg.length; i++) {
-        //card0.addEventListener('click', showCard ) 
-    //}
-    
 
+    // Array of our selection 
+    var arrSelection = [];
+    var arrResult = [0,0];
+    var match = 0;
+    var count = 0;
 
+    function checkMatch() {
+        arrSelection.push(this);
+        console.log('arrSelection : ' + arrSelection)
 
+        if (arrSelection.length === 2) {
+            if (arrSelection[0].style.backgroundImage == arrSelection[1].style.backgroundImage) {
+                match++;
+                arrResult[0] = match;
+                arrSelection[0].setAttribute('class','card disable');
+                arrSelection[1].setAttribute('class','card disable');
+                console.log('match 1 :' + match)
+            } else {
+                count++;
+                arrResult[1] = count;
+                var selected1 = arrSelection[0];
+                var selected2 = arrSelection[1]
+                interval = setTimeout(function () {
+                    selected1.style.backgroundImage = 'url("./images/cardBack.png")'
+                    selected2.style.backgroundImage = 'url("./images/cardBack.png")'
+                }, 1000);
+                console.log('count :' + count);
+            }
+            arrSelection = [];
+        }
+        //return arrResult;
+    }
 
-
-
-    // ------------ TENTATIVE FLIP .. FAIL
-    // $(".front").css('background', 'red')
-    // $(".back").css('background', 'green')
-    // $("#card").on('click', returnCard())
-    // function returnCard(event) {
-    //     $("#card").flip();
-
-    //     setTimeout(function(){$("#card").flip();}, 1000);
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(match == (unshuffledImg.length/2)){
+        console.log('You won the game !')
+    }
 
 
 
