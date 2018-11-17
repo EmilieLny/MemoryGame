@@ -33,7 +33,6 @@ $(document).ready(function () {
         for (var i = 0; i < cards.length; i++) {
             if (cardChoosed == cards[i]) {
                 var cardId = $('.card#' + cardChoosed.id);
-                cardId.css("border", "3px solid red");
                 cardId.css('background-image', 'url("./images/' + shuffledImg[i] + '.png")');
             }
         }
@@ -51,11 +50,13 @@ $(document).ready(function () {
             boardGame.setAttribute('class','disable col-lg-8')
             if (arrSelection[0].style.backgroundImage == arrSelection[1].style.backgroundImage) {
                 match++;
+                $('.match').text(match);
                 arrSelection[0].setAttribute('class','card disable');
                 arrSelection[1].setAttribute('class','card disable');
                 boardGame.setAttribute('class','col-lg-8')
             } else {
                 count++;
+                $('.count').text(count);
                 var selected1 = arrSelection[0];
                 var selected2 = arrSelection[1]
                 interval = setTimeout(function () {
