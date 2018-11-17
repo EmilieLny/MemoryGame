@@ -32,7 +32,7 @@ $(document).ready(function () {
     // Show my card selected
     function showCard() {
         var cardChoosed = this;
-            console.log('cardChoosed ' + cardChoosed.id)
+            //console.log('cardChoosed ' + cardChoosed.id)
         for (var i = 0; i < cards.length; i++) {
             if (cardChoosed == cards[i]) {
                 var cardId = $('.card#' + cardChoosed.id);
@@ -44,40 +44,43 @@ $(document).ready(function () {
 
     // Array of our selection 
     var arrSelection = [];
-    var arrResult = [0,0];
     var match = 0;
     var count = 0;
 
     function checkMatch() {
         arrSelection.push(this);
-        console.log('arrSelection : ' + arrSelection)
+        //console.log('arrSelection : ' + arrSelection)
 
         if (arrSelection.length === 2) {
+            boardGame.setAttribute('class','disable col-lg-8')
             if (arrSelection[0].style.backgroundImage == arrSelection[1].style.backgroundImage) {
                 match++;
-                arrResult[0] = match;
+                console.log('match 1 :' + match)
                 arrSelection[0].setAttribute('class','card disable');
                 arrSelection[1].setAttribute('class','card disable');
+                boardGame.setAttribute('class','col-lg-8')
                 console.log('match 1 :' + match)
             } else {
                 count++;
-                arrResult[1] = count;
+                console.log('count :' + count);
                 var selected1 = arrSelection[0];
                 var selected2 = arrSelection[1]
                 interval = setTimeout(function () {
+                    boardGame.setAttribute('class','col-lg-8')
                     selected1.style.backgroundImage = 'url("./images/cardBack.png")'
                     selected2.style.backgroundImage = 'url("./images/cardBack.png")'
                 }, 1000);
-                console.log('count :' + count);
+                
             }
             arrSelection = [];
+
+            if(match == (unshuffledImg.length/2)){
+                console.log('You won the game !')
+            }
         }
-        //return arrResult;
     }
 
-    if(match == (unshuffledImg.length/2)){
-        console.log('You won the game !')
-    }
+    
 
 
 
