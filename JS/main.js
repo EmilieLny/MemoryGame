@@ -32,7 +32,6 @@ $(document).ready(function () {
     // Show my card selected
     function showCard() {
         var cardChoosed = this;
-            //console.log('cardChoosed ' + cardChoosed.id)
         for (var i = 0; i < cards.length; i++) {
             if (cardChoosed == cards[i]) {
                 var cardId = $('.card#' + cardChoosed.id);
@@ -75,7 +74,10 @@ $(document).ready(function () {
             arrSelection = [];
 
             if(match == (unshuffledImg.length/2)){
-                console.log('You won the game !')
+                console.log('You won the game !');
+                $('#won').modal({
+                    show: true
+                  })
             }
         }
     }
