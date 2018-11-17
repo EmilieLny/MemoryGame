@@ -3,9 +3,8 @@ $(document).ready(function () {
     // All my cards 
     var unshuffledImg = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',]
     
-    // Suffled my cards
+    // Suffled cards
     var shuffledImg = unshuffledImg.sort(function() { return 0.5 - Math.random() });
-    console.log(shuffledImg);
     
     // Select my Board Game
     var boardGame = document.getElementById('boardGame');
@@ -19,7 +18,6 @@ $(document).ready(function () {
             card.setAttribute('id', 'card' + (i + 1));
             boardGame.append(card);
             cardId = boardGame.lastElementChild;
-            console.log(cardId);
             cardId.addEventListener('click', showCard);
             cardId.addEventListener('click', checkMatch);
         }
@@ -41,27 +39,23 @@ $(document).ready(function () {
         }
     }
 
-    // Array of our selection 
-    var arrSelection = [];
-    var match = 0;
-    var count = 0;
+   
+    var arrSelection = []; // Array of the selection of the user
+    var match = 0; // Number of matchs
+    var count = 0;// Number of no matchs
 
+    // Count the number of matchs and show to the user when he won the game !
     function checkMatch() {
         arrSelection.push(this);
-        //console.log('arrSelection : ' + arrSelection)
-
         if (arrSelection.length === 2) {
             boardGame.setAttribute('class','disable col-lg-8')
             if (arrSelection[0].style.backgroundImage == arrSelection[1].style.backgroundImage) {
                 match++;
-                console.log('match 1 :' + match)
                 arrSelection[0].setAttribute('class','card disable');
                 arrSelection[1].setAttribute('class','card disable');
                 boardGame.setAttribute('class','col-lg-8')
-                console.log('match 1 :' + match)
             } else {
                 count++;
-                console.log('count :' + count);
                 var selected1 = arrSelection[0];
                 var selected2 = arrSelection[1]
                 interval = setTimeout(function () {
@@ -69,22 +63,15 @@ $(document).ready(function () {
                     selected1.style.backgroundImage = 'url("./images/cardBack.png")'
                     selected2.style.backgroundImage = 'url("./images/cardBack.png")'
                 }, 1000);
-                
             }
             arrSelection = [];
 
             if(match == (unshuffledImg.length/2)){
-                console.log('You won the game !');
                 $('#won').modal({
                     show: true
-                  })
+                })
             }
         }
     }
-
-    
-
-
-
 
 });
